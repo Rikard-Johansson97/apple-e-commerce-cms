@@ -1,12 +1,18 @@
 import Banner from "@/components/Banner";
 import Header from "@/components/Header";
 import fetchCategories from "@/lib/fetchCategories";
+import fetchProducts from "@/lib/fetchProducts";
 import { Tab } from "@headlessui/react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
-export default async function Home() {
-  const categories = await fetchCategories();
+interface Props {
+  categories: Category[];
+  products: Product[];
+  // session: Session | null;
+}
+
+export default function Home({ categories, products }: Props) {
   // const showProducts = (category: number) => {
   //   return products
   //     .filter((product) => product.category._ref === categories[category]._id)
@@ -14,6 +20,7 @@ export default async function Home() {
   // };
 
   console.log(categories);
+  console.log(products);
 
   return (
     <>
@@ -63,3 +70,18 @@ export default async function Home() {
     </>
   );
 }
+
+// Backend Code
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const categories = await fetchCategories();
+  const products = await fetchProducts();
+  // const session = await getSession(context);
+
+  return {
+    props: {
+      categories,
+      products,
+      // session,
+    },
+  };
+};
