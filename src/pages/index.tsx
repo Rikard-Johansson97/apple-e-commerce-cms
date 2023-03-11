@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner";
 import Header from "@/components/Header";
+import Product from "@/components/Product";
 import fetchCategories from "@/lib/fetchCategories";
 import fetchProducts from "@/lib/fetchProducts";
 import { Tab } from "@headlessui/react";
@@ -13,11 +14,11 @@ interface Props {
 }
 
 export default function Home({ categories, products }: Props) {
-  // const showProducts = (category: number) => {
-  //   return products
-  //     .filter((product) => product.category._ref === categories[category]._id)
-  //     .map((product) => <Product product={product} key={product._id} />); // filter products by category
-  // };
+  const showProducts = (category: number) => {
+    return products
+      .filter((product) => product.category._ref === categories[category]._id)
+      .map((product) => <Product product={product} key={product._id} />); // filter products by category
+  };
 
   console.log(categories);
   console.log(products);
