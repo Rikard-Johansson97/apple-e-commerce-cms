@@ -12,7 +12,9 @@ const fetchCategories = async (
   const mergedOptions = { ...defaultOptions, ...options };
   const url = `${mergedOptions.baseUrl}/api/getCategories`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error(`Failed to fetch categories (HTTP ${res.status})`);

@@ -1,15 +1,12 @@
 import Banner from "@/components/Banner";
 import Header from "@/components/Header";
-import fetchCategories from "@/utils/fetchCategories";
+import fetchCategories from "@/lib/fetchCategories";
 import { Tab } from "@headlessui/react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
-interface Props {
-  categories: Category[];
-}
-
-export default function Home({ categories }: Props) {
+export default async function Home() {
+  const categories = await fetchCategories();
   // const showProducts = (category: number) => {
   //   return products
   //     .filter((product) => product.category._ref === categories[category]._id)
@@ -66,14 +63,3 @@ export default function Home({ categories }: Props) {
     </>
   );
 }
-
-// Backend
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const categories = await fetchCategories();
-
-  return {
-    props: {
-      categories,
-    },
-  };
-};
