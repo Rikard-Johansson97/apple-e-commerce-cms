@@ -43,6 +43,13 @@ const Checkout: FC = () => {
 
     // redirect checkout
     const stripe = await getStripe();
+    const { error } = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
+
+    console.warn(error.message);
+
+    setLoading(false);
   };
 
   useEffect(() => {
