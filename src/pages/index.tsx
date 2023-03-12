@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import Basket from "@/components/Basket";
 import Header from "@/components/Header";
 import Product from "@/components/Product";
 import fetchCategories from "@/lib/fetchCategories";
@@ -32,6 +33,7 @@ export default function Home({ categories, products }: Props) {
 
       <main className='relative h-[200vh] bg-[#e7ecee]'>
         <Header />
+        <Basket />
         <Banner />
       </main>
       <section className='relative z-40 -mt-[100vh] min-h-screen bg-[#1B1B1B]'>
