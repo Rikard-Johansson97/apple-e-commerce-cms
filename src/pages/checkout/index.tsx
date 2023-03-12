@@ -68,7 +68,7 @@ const Checkout: FC = () => {
       </Head>
       <Header />
       <main className='mx-auto max-w-5xl pb-24'>
-        <div className='px-5 pb-4'>
+        <div className='flex flex-col items-center pb-4'>
           <h2 className='my-4 text-3xl font-semibold lg:text-4xl'>
             {items.length > 0 ? "Review your bag" : "Your bag is empty"}
           </h2>

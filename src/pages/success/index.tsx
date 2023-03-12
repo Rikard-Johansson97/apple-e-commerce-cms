@@ -13,8 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { calculateProductTotal } from "@/utils/calculateProductTotal";
+import { useSession } from "next-auth/react";
 
 interface SuccessProps {
   products: StripeProduct[];
@@ -38,12 +37,6 @@ const Success: FC<SuccessProps> = ({ products }) => {
   const handleShowOrderSummary = () => {
     setShowOrderSummary(!showOrderSummary);
   };
-
-  // Calculate total quantity
-  const totalQuantity = products.reduce(
-    (acc, product) => acc + product.quantity,
-    0
-  );
 
   // Format subtotal and total price
   const formattedSubtotal = new Intl.NumberFormat("en-US", {
@@ -80,7 +73,7 @@ const Success: FC<SuccessProps> = ({ products }) => {
         </Link>
       </header>
       <main className=''>
-        <section className='order-2 mx-auto max-w-xl pb-12 lg:mx-w-none lg:pr-16 lg:pt-16 xl:pl-16 2xl:pl-44'>
+        <section className='order-2 mx-auto max-w-xl pb-12 lg:mx-w-none  '>
           <Link href='/' className='hidden cursor-pointer  lg:inline-flex'>
             <Image
               src='/Apple_logo_black.svg.png'
@@ -89,8 +82,8 @@ const Success: FC<SuccessProps> = ({ products }) => {
               alt='apple logo'
             />
           </Link>
-          <div className='my-8 ml-4 flex gap-4 lg:ml-14 xl:ml-0'>
-            <div className='flex h-11 w-11 items-center justify-center rounded-full border-2 border-black'>
+          <div className='my-8 ml-4 flex gap-4'>
+            <div className='flex p-1 h-11 w-11 items-center justify-center rounded-full border-2 border-black'>
               <CheckIcon />
             </div>
             <div>
@@ -101,7 +94,7 @@ const Success: FC<SuccessProps> = ({ products }) => {
             </div>
           </div>
 
-          <div className='mx-4 divide-y divide-gray-300 rounded-md border border-gray-300 p-4 lg:ml-14'>
+          <div className='mx-4 divide-y divide-gray-300 rounded-md border border-gray-300 p-4'>
             <div className='space-y-2 pb-3'>
               <p>Your order is confirmed</p>
               <p className='text-sm text-gray-600'>
@@ -116,13 +109,13 @@ const Success: FC<SuccessProps> = ({ products }) => {
               <p>CNB21441622</p>
             </div>
           </div>
-          <div className='my-4 mx-4 space-y-2 rounded-md border border-gray-300 p-4 lg:ml-14'>
+          <div className='my-4 mx-4 space-y-2 rounded-md border border-gray-300 p-4'>
             <p>Order updates</p>
             <p className='text-sm text-gray-600'>
               You’ll get shipping and delivery updates by email and text.
             </p>
           </div>
-          <div className='mx-4 flex flex-col items-center justify-between text-sm lg:ml-14 lg:flex-row'>
+          <div className='mx-4 flex flex-col items-center justify-between text-sm lg:flex-row'>
             <p className='hidden lg:inline'>Need help? Contact us</p>
             {mounted && (
               <Button
@@ -160,16 +153,20 @@ const Success: FC<SuccessProps> = ({ products }) => {
             </div>
 
             {showOrderSummaryCondition && (
-              <div className='mx-auto max-w-xl divide-y border-gray-300 px-4 py-4 lg:mx-0 lg:max-w-lg lg:px-10 lg:py-16'>
+              <div className='mx-auto max-w-xl divide-y border-gray-300 px-4 py-4'>
                 <div className='space-y-4 pb-4'>
                   {products?.map((product) => (
                     <div
                       key={product.id}
                       className='flex items-center space-x-4 text-sm font-medium'>
                       <div className='relative flex h-16 w-16 items-center justify-center rounded-md border border-gray-300 bg-[#F1F1F1] text-xs text-white'>
-                        <div className='relative h-7 w-7 animate-bounce rounded-md'>
-                          <Image src='https://rb.gy/vsvv2o' fill alt='icon' />
-                        </div>
+                        <Image
+                          src='/Apple_logo_black.svg.png'
+                          width={24}
+                          height={24}
+                          alt='icon'
+                        />
+
                         <div className='absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[gray] text-xs'>
                           {product.quantity}
                         </div>
