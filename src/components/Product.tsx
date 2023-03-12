@@ -8,7 +8,7 @@ interface ProductProps {
 }
 
 const Product: FC<ProductProps> = ({ product }) => {
-  console.log(product);
+  const addItemToBasket = () => {};
 
   return (
     <div className='flex flex-col justify-center items-center rounded-xl p-8 bg-[#35383c] shadow-md'>
@@ -24,7 +24,7 @@ const Product: FC<ProductProps> = ({ product }) => {
           <p>{product.title}</p>
           <p className='text-gray-300'>{product.price} $</p>
         </div>
-        <div className='flex h-12 w-12 flex-shrink-0 cursor-pointer items-center justify-center rounded-full appleGradient md:h-14 md:w-14 duration-200 opacity-75 hover:opacity-100'>
+        <div className='flex h-12 w-12 flex-shrink-0 cursor-pointer items-center justify-center rounded-full appleGradient md:h-14 md:w-14 duration-200 hover:brightness-110'>
           <ShoppingCartIcon className='h-6 w-6  text-white ' />
         </div>
       </div>
