@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import Button from "@/components/Button";
 import CheckoutProduct from "@/components/CheckoutProduct";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { Stripe } from "stripe";
+import { fetchPostJSON } from "@/lib/api-helpers";
+import getStripe from "@/lib/get-stripejs";
 
 const Checkout: FC = () => {
   const items = useSelector(selectBasketItems);
@@ -14,6 +17,7 @@ const Checkout: FC = () => {
   const [groupedItemsInBasket, setGroupedItemsOutBasket] = useState<{
     [key: string]: Product[];
   }>({});
+  const [loading, setLoading] = useState(false);
 
   const basketTotal = useSelector(selectBasketTotal);
 
@@ -22,7 +26,24 @@ const Checkout: FC = () => {
     currency: "USD",
   }).format(basketTotal);
 
-  const createCheckoutSession = async () => {};
+  const createCheckoutSession = async () => {
+    setLoading(true);
+
+    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
+      "/api/checkout_sessions",
+      {
+        items: items,
+      }
+    );
+
+    if ((checkoutSession as any).statusCode === 500) {
+      console.log((checkoutSession as any).error);
+      return;
+    }
+
+    // redirect checkout
+    const stripe = await getStripe();
+  };
 
   useEffect(() => {
     const groupedItems = items.reduce((results, item) => {
