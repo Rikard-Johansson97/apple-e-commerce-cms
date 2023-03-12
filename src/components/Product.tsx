@@ -20,6 +20,11 @@ const Product: FC<ProductProps> = ({ product }) => {
     });
   };
 
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(product.price);
+
   return (
     <div className='flex flex-col justify-center items-center rounded-xl p-8 bg-[#35383c] shadow-md'>
       <Image
@@ -32,7 +37,7 @@ const Product: FC<ProductProps> = ({ product }) => {
       <div className='flex items-center justify-between pt-8 w-full'>
         <div className='space-y-2 text-lg text-white '>
           <p>{product.title}</p>
-          <p className='text-gray-300'>{product.price} $</p>
+          <p className='text-gray-300'>{formattedPrice}</p>
         </div>
         <div
           className='flex h-12 w-12 flex-shrink-0 cursor-pointer items-center justify-center rounded-full appleGradient md:h-14 md:w-14 duration-200 hover:brightness-110'

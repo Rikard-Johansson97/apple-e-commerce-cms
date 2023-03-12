@@ -23,10 +23,12 @@ export const basketSlice = createSlice({
       state: BasketState,
       action: PayloadAction<{ id: string }>
     ) => {
-      // Filter out the item with the matching ID
-      state.items = state.items.filter(
-        (item) => item._id !== action.payload.id
+      const index = state.items.findIndex(
+        (item) => item._id === action.payload.id
       );
+      if (index !== -1) {
+        state.items.splice(index, 1);
+      }
     },
   },
 });
