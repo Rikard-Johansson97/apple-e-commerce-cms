@@ -36,7 +36,7 @@ interface Product {
     _type: "reference";
     _ref: string;
   };
-  image: Image[];
+  images: Image[];
 }
 
 interface StripeProduct {

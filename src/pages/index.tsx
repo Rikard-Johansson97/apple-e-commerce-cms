@@ -14,14 +14,12 @@ interface Props {
 }
 
 export default function Home({ categories, products }: Props) {
-  const showProducts = (category: number) => {
+  const showProducts = (categoryIndex: number) => {
+    const categoryId = categories[categoryIndex]._id;
     return products
-      .filter((product) => product.category._ref === categories[category]._id)
-      .map((product) => <Product product={product} key={product._id} />); // filter products by category
+      .filter((product) => product.category._ref === categoryId)
+      .map((product) => <Product product={product} key={product._id} />);
   };
-
-  console.log(categories);
-  console.log(products);
 
   return (
     <>
@@ -49,9 +47,9 @@ export default function Home({ categories, products }: Props) {
                   key={category._id}
                   id={category._id}
                   className={({ selected }) =>
-                    `whitespace-nowrap rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
+                    `whitespace-nowrap rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 opacity-75 md:text-base duration-200 hover:opacity-100 ${
                       selected
-                        ? "borderGradient bg-[#35383C] text-white"
+                        ? "borderGradient bg-[#35383C] text-white opacity-100"
                         : "border-b-2 border-[#35383C] text-[#747474]"
                     }`
                   }>
@@ -59,12 +57,14 @@ export default function Home({ categories, products }: Props) {
                 </Tab>
               ))}
             </Tab.List>
-            {/* <Tab.Panels className='mx-auto max-w-fit pt-10 pb-24 sm:px-4'>
-              <Tab.Panel className='tabPanel'>{showProducts(0)}</Tab.Panel>
-              <Tab.Panel className='tabPanel'>{showProducts(1)}</Tab.Panel>
-              <Tab.Panel className='tabPanel'>{showProducts(2)}</Tab.Panel>
-              <Tab.Panel className='tabPanel'>{showProducts(3)}</Tab.Panel>
-            </Tab.Panels> */}
+            <Tab.Panels className='tabPanels'>
+              {categories.map((_, index) => (
+                <Tab.Panel key={index} className='productPanel'>
+                  {showProducts(index)}
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+            ;
           </Tab.Group>
         </div>
       </section>

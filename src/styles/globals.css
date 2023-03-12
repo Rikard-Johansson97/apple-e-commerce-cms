@@ -29,4 +29,13 @@
     background: linear-gradient(to right, #ec4899, #8b5cf6) left bottom no-repeat;
     background-size: 100% 2px
   }
+  .productPanel{
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
+    gap: 1rem;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    @apply max-w-7xl
+  }
 }
