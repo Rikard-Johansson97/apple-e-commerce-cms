@@ -59,11 +59,11 @@ const Success: FC<SuccessProps> = ({ products }) => {
         <title>Thank You! - Apple</title>
         <link rel='icon' href='/favicon.ico'></link>
       </Head>
-      <header className='mx-auto max-w-xl p-4'>
+      <header className='mx-auto max-w-xl pt-4 px-4  lg:hidden'>
         <Link
           href='/'
           className='cursor-pointer 
-         lg:hidden'>
+        '>
           <Image
             src='/Apple_logo_black.svg.png'
             height={24}
@@ -72,8 +72,8 @@ const Success: FC<SuccessProps> = ({ products }) => {
           />
         </Link>
       </header>
-      <main className=''>
-        <section className='order-2 mx-auto max-w-xl pb-12 lg:mx-w-none  '>
+      <main className='lg:flex'>
+        <section className='order-2 mx-auto max-w-xl pb-12 lg:mx-w-none lg:pt-12 '>
           <Link href='/' className='hidden cursor-pointer  lg:inline-flex'>
             <Image
               src='/Apple_logo_black.svg.png'
@@ -128,7 +128,7 @@ const Success: FC<SuccessProps> = ({ products }) => {
           </div>
         </section>
         {mounted && (
-          <section className='overflow-y-scroll border-y border-l border-gray-300 bg-[#FAFAFA] lg:order-2 lg:col-span-4 lg:h-screen lg:border-y-0'>
+          <section className='lg:w-96 overflow-y-scroll border-y border-l border-gray-300 bg-[#FAFAFA] lg:order-1 lg:col-span-4 lg:h-screen lg:border-y-0 lg:pt-12 '>
             <div
               className={`w-full ${
                 showOrderSummaryCondition && "border-b"
