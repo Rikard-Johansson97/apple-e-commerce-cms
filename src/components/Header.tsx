@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { selectBasketItems } from "@/redux/basketSlice";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 interface HeaderProps {}
 
@@ -39,7 +40,7 @@ const navigation = {
 };
 
 const Header: FC<HeaderProps> = ({}) => {
-  const session = false;
+  const { data: session } = useSession();
   const items = useSelector(selectBasketItems);
   return (
     <header className='sticky top-0 z-30 flex w-full items-center justify-between bg-[#E7ECEE] p-4'>
@@ -77,14 +78,15 @@ const Header: FC<HeaderProps> = ({}) => {
         </Link>
         {session ? (
           <Image
-            src='https://i.imgur.com/308CpXC.png'
+            src={session.user?.image || "/favicon.ico"}
             alt='avatar-image'
-            width={24}
-            height={24}
+            width={34}
+            height={34}
             className='cursor-pointer rounded-full'
+            onClick={() => signOut()}
           />
         ) : (
-          <UserIcon className='headerIcon' onClick={() => {}} />
+          <UserIcon className='headerIcon' onClick={() => signIn()} />
         )}
       </div>
     </header>

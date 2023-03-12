@@ -6,12 +6,14 @@ import fetchCategories from "@/lib/fetchCategories";
 import fetchProducts from "@/lib/fetchProducts";
 import { Tab } from "@headlessui/react";
 import { GetServerSideProps } from "next";
+import type { Session } from "next-auth";
+import { getSession } from "next-auth/react";
 import Head from "next/head";
 
 interface Props {
   categories: Category[];
   products: Product[];
-  // session: Session | null;
+  session: Session | null;
 }
 
 export default function Home({ categories, products }: Props) {
@@ -78,13 +80,13 @@ export default function Home({ categories, products }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const categories = await fetchCategories();
   const products = await fetchProducts();
-  // const session = await getSession(context);
+  const session = await getSession(context);
 
   return {
     props: {
       categories,
       products,
-      // session,
+      session,
     },
   };
 };

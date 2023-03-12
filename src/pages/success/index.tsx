@@ -90,7 +90,7 @@ const Success: FC<SuccessProps> = ({ products }) => {
               <p className='text-sm text-gray-600'>
                 Order #{session_id?.slice(-5)}
               </p>
-              <h4 className='text.lg'>Thank You</h4>
+              <h4 className='text.lg'>Thank You {session?.user?.name}</h4>
             </div>
           </div>
 
